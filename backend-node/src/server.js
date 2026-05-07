@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
 
 // Basic route
 app.get('/', (req, res) => {
-  res.json({ message: 'Chat server is running (ES Modules)', status: 'OK' });
+  res.json({ message: 'Chat server is running (ES Modules)!', status: 'OK' });
 });
 
 const PORT = process.env.PORT || 4000;
