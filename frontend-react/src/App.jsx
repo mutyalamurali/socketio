@@ -9,7 +9,6 @@ function App() {
   const [lastMessage, setLastMessage] = useState('');
   const [inputMessage, setInputMessage] = useState('');
 
-  // Existing health check query
   const { data: healthData, isLoading, error, refetch } = useQuery({
     queryKey: ['healthCheck'],
     queryFn: getHealthCheck,
@@ -26,7 +25,7 @@ function App() {
       console.log('Socket disconnected');
     }
 
-    function onChatMessage(value: string) {
+    function onChatMessage(value) {
       setLastMessage(value);
     }
 
@@ -41,7 +40,7 @@ function App() {
     };
   }, []);
 
-  const sendMessage = (e: React.FormEvent) => {
+  const sendMessage = (e) => {
     e.preventDefault();
     if (inputMessage.trim()) {
       socket.emit('message', inputMessage);
@@ -81,7 +80,7 @@ function App() {
       <div className="card" style={{ marginTop: '2rem', borderTop: '1px solid #eee', paddingTop: '1rem' }}>
         <h3>Backend API Health:</h3>
         {isLoading && <p>Loading...</p>}
-        {error && <p style={{ color: 'red' }}>Error: {(error as any).message}</p>}
+        {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
         {healthData && (
           <pre style={{ textAlign: 'left', background: '#f4f4f4', padding: '1rem', color: '#333', fontSize: '0.8rem' }}>
             {JSON.stringify(healthData, null, 2)}
